@@ -1,0 +1,243 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Fazladan taşma varsa engeller */
+}
+
+
+
+i{
+    font-size: 1.2rem;
+}
+h1 {
+    padding: 1rem 0 0.6rem 0 !important;
+    text-align: center !important;
+    font-size: 1.8rem !important;
+    font-weight: bold !important;
+    background: linear-gradient(to right, #43AFF3, #BE82F0, #82F0B9) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+.recovision-header{
+    background-color: #0000003c;
+}
+input:focus, textarea:focus {
+    outline: 1px solid #f8f8f87c; 
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.735); 
+}
+
+.chatbot-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Kart görünümü için */
+.chatbot-card {
+    width: 80%;
+    height: 600px;
+    background-color: rgba(15, 15, 15, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* içerik çok olunca taşma durumunu yönetmek için */
+}
+
+/* Mesajların bulunduğu kısım */
+.chatbot-messages {
+    flex: 1; /* Kartın büyük kısmını kapsasın */
+    padding: 20px;
+    overflow-y: auto; /* Mesajlar çoğalınca kaydırma çubuğu gösterilsin */
+}
+
+/* Mesaj giriş ve buton alanı */
+.chatbot-input-area {
+    height: 65px;
+    display: flex;
+    border-top: 1px solid #000000;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Metin kutusu stili */
+.chatbot-input-area input[type="text"] {
+    background-color: rgba(0, 0, 0, 0.3);
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #595959;
+    border-radius: 30px;
+    margin-right: 10px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.803);
+}
+
+/* Gönder butonu stili */
+.chatbot-input-area button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #000000;
+    color: #936aacd8;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.chatbot-input-area button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+    transform: none !important;
+}
+
+
+/* Kullanıcı mesajı */
+.chatbot-message-user {
+    margin-bottom: 10px;
+    color: #ffffffdd;
+    max-width: 80%;
+    margin-left: auto; 
+    margin-right: 0; 
+    display: flex;
+    justify-content: flex-end;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word; /* Uzun kelimeleri kırmaya zorlar */
+
+}
+
+/* Bot mesajı */
+.chatbot-message-bot {
+    border-radius: 15px;
+    margin-bottom: 10px;
+    color: #ffffffdd;
+    max-width: 80%;
+    display: flex;
+    justify-content: flex-start; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word; /* Uzun kelimeleri kırmaya zorlar */
+
+}
+
+/* Kullanıcı mesajları için div */
+.text1 {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    text-align: right;
+    background-color: rgba(128, 128, 128, 0.073);
+    width: auto; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word; /* Uzun kelimeleri kırmaya zorlar */
+}
+
+/* Bot mesajları için div */
+.text2 {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    text-align: left;
+    background-color: rgba(128, 128, 128, 0.073);
+    width: auto; 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word; /* Uzun kelimeleri kırmaya zorlar */
+}
+
+
+
+/* Butonlar  */
+.chatbot-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.action-button {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.action-button:hover i{
+    font-size: 1.4rem;
+}
+
+
+.action-button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+    transform: none !important;
+}
+
+#togbuton:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+    transform: none !important;
+}
+
+#togbuton{
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#togbuton:hover i{
+    font-size: 1.4rem;
+
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+.ddmenu {
+    background-color: transparent !important;
+    border: none !important;
+}
+.dropdown-menu .action-button{
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.113) !important;
+    border: none !important;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background-color: #ff0000 !important; 
+}
+
+
+.butt2{
+    font-size: 1rem !important;
+}
+.butt2:hover{
+    font-size: 1.2rem !important;
+}
+
+
+@media (max-width: 1200px){
+    html {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 1000px) {
+    html {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 900px) {
+    html {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 700px) {
+    html {
+      font-size: 10px !important;
+    }
+  }
+
+
+#logo2 {
+    width: 3.5rem;
+    height: 3.5rem;
+  }

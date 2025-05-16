@@ -1,0 +1,85 @@
+label {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+li {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(116, 79, 145), rgb(39, 96, 132), rgb(74, 134, 105));
+    background-clip: text;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+.password-change-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    margin: 0;
+    padding: 0;
+}
+
+.password-change-container {
+    margin: 0.625rem 1.875rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1.875rem 2.5rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+    width: 70%;
+    text-align: center; 
+}
+
+.password-change-container h2 {
+    color: #333;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1.25rem;
+}
+
+.password-change-container p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.1875rem;
+}
+
+.password-change-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left; 
+}
+
+.password-change-form input {
+    background-color: rgba(99, 99, 99, 0.161);
+    width: 100%;
+    padding: 0.75rem 0.9375rem;
+    border: none !important;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.password-change-form input:focus {
+    border-color: #004b9b;
+    outline: none;
+}
+
+button {
+    height: 3rem !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: #ffffffda !important;
+    font-size: 1rem !important;
+    border: solid 0.125rem rgba(99, 99, 99, 0.261) !important;
+    border-radius: 0.3125rem !important;
+    cursor: pointer !important;
+}
+
+.password-change-form button:hover {
+    background-color: rgba(71, 71, 71, 0.162) !important;
+}

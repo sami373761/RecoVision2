@@ -1,0 +1,71 @@
+.form-control:focus {
+  outline: 2px solid #190A28; 
+  box-shadow: 0 0 5px #190A28; 
+
+}
+.nav-link{
+color: #ffffffe8;
+}
+
+
+@media (max-width: 600px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    background-color: transparent; 
+    padding: 10px; 
+  }
+
+
+  .navbar-toggler-icon:focus {
+    outline: none; 
+    box-shadow: none;
+  }
+  .navbar-toggler-icon {
+      background-image: none; 
+      font-size: 1rem; 
+      color: rgba(255, 255, 255, 0.185) !important; 
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important; 
+  }
+
+  /* Açılan menünün tasarımı */
+  .navbar-collapse {
+      background-color: transparent; 
+      padding: 15px 20px;
+      border-radius: 5px;
+  }
+
+
+  .nav-link:hover {
+    font-size: 1.1rem;
+  }
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Kendi sağından açılması için */
+    margin-left: 10px;
+    transform: translateY(-10%);
+    border-radius: 5px;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+.navbar {
+  padding: 1.8rem !important;
+  display: flex !important;
+  align-items: center !important; 
+}
+
+
+#home_button{
+  font-weight: 500 !important; 
+} 

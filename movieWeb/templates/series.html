@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/browse.css' %}">
+{% endblock %}
+{% block title %} Movie Page {%endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row g-4">
+          {% for dizi in diziler %}
+            <div class="col-md-6 d-flex pt-4 pb-2">
+              <div class="card" style="height: 300px;">
+                <div class="row g-0 h-100">
+                  <div class="col-md-5 h-100">
+                    <img 
+                      src="{{ dizi.image.url }}" 
+                      alt="{{ dizi.title }}" 
+                      style="object-fit: cover; width: 100%; height: 100%;"
+                    >
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body d-flex flex-column" style="height: 100%;">
+                      <h5 class="card-title" style="font-size: 1.2rem;"><a class="link-hover-effect text-light fw-bold" href="{% url 'serie' slug=dizi.slug %}">{{ dizi.title }}</a></h5>
+                      <div style="flex: 1; overflow-y: auto;">
+                        <p class="card-text" style="font-size: 0.85rem;">{{ dizi.description }}</p>
+                      </div>
+                      <div>
+                        <p class="card-text mb-0">
+                          <small class="text-muted">IMDB: {{ dizi.imdb_rating }}</small>
+                        </p>
+                        <p class="card-text mb-0">
+                          {% if dizi.id in saved_serie_ids %}
+                          <small class="text-muted">Year: {{ dizi.year }}</small><a style="float: right;" href="{% url 'kaydet_serie' serie_id=dizi.id%}" class="btn btn-sm btn-outline-secondary"><i style="font-size: 0.9rem;" class="fa-solid fa-check"></i></a>
+                          {% else %}
+                          <small class="text-muted">Year: {{ dizi.year }}</small><a style="float: right;" href="{% url 'kaydet_serie' serie_id=dizi.id%}" class="btn btn-sm btn-outline-secondary">Save</a>
+                          {% endif %}
+                        </p>
+                      </div>
+                    </div> 
+                  </div> 
+                </div>
+              </div> 
+            </div> 
+          {% endfor %}
+        </div> 
+      </div> 
+      
+      
+
+      
+      
+      
+    
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+
+
+{% endblock %}
+{% block title %}RecoVision{% endblock %}
+{% block content %}
+<div class="chatbot-container">
+  <div class="chatbot-card">
+    <div class="recovision-header">
+      <h1>RecoVision rv1</h1>
+    </div>
+    <div class="chatbot-messages" id="messages">
+    </div>
+
+    <div class="chatbot-input-area">
+      <div class="chatbot-actions">
+        <div class="btn-group dropup">
+          <button id="togbuton" type="button" class="dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-regular fa-lightbulb"></i>
+          </button>
+          <div class="ddmenu dropdown-menu">
+            <button title="Customized movie suggestions based on your preferences" class="action-button"><i class="butt2 fa-solid fa-film"></i></button>
+            <button title="Tailored series suggestions to match your interests" class="action-button"><i class="butt2 fa-solid fa-tv"></i></button>
+            <button  title="Personalized book recommendations crafted for you" class="action-button"><i class="butt2 fa-solid fa-book"></i></button>
+          </div>
+        </div>
+      </div>
+      <input 
+        style="padding-left: 1.5rem;" 
+        type="text" 
+        id="chatInput" 
+        placeholder="Type your message..." 
+        maxlength="130" 
+        onkeydown="if(event.key === 'Enter') sendMessage()">
+      <button class="action-button" onclick="sendMessage()">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+.chatbot-message-bot {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  margin: 5px 0;
+  position: relative;
+}
+
+.typing-bubble {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #555;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+</style>
+
+<script>
+  const csrfToken = "{{ csrf_token }}";
+
+  async function sendMessage() {
+    const inputElement = document.getElementById('chatInput');
+    const sendButton = document.querySelector(".action-button[onclick='sendMessage()']");
+    const message = inputElement.value.trim();
+
+    if (!message) {
+        alert("Please enter a message.");
+        return;
+    }
+
+    inputElement.disabled = true;
+    sendButton.disabled = true;
+
+    const messages = document.getElementById('messages');
+    messages.innerHTML += `<div class="chatbot-message-user"><div class="text1">${message}</div></div>`;
+    messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+
+    inputElement.value = '';
+    inputElement.blur(); 
+
+    const typingBubble = `
+        <div id="typingBubble" class="chatbot-message-bot">
+            <div class="typing-bubble">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    `;
+    messages.innerHTML += typingBubble;
+    messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+
+    try {
+        const response = await fetch('/reco', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({ message: message })
+        });
+
+        if (!response.ok) {
+            throw new Error("Sunucudan hata döndü.");
+        }
+
+        const data = await response.json();
+
+        document.getElementById('typingBubble').remove();
+        messages.innerHTML += `<div class="chatbot-message-bot"><div class="text2">${data.result}</div></div>`;
+        messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+
+    } catch (error) {
+        console.error("Hata:", error);
+        alert("An error occurred while sending the message.");
+        document.getElementById('typingBubble').remove();
+    }
+
+    inputElement.disabled = false;
+    sendButton.disabled = false;
+    inputElement.focus();
+}
+
+
+</script>
+{% endblock %}

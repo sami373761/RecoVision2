@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block title %}Kayıtlı Filmler{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Saved Movies</h2>
+    
+    {% for film in filmler %}
+        {% if film.id in saved_movie_ids %}
+            <div 
+                 class="kayıt row align-items-center p-2 mb-2 shadow-sm" 
+                 style="border-radius: 10px;"
+            >
+                <div class="col-auto">
+                    <img 
+                         src="{{ film.image.url }}" 
+                         alt="{{ film.title }}" 
+                         class="img-fluid rounded" 
+                         style="object-fit: cover; width: 80px; height: 80px;"
+                    >
+                </div>
+                <div class="col">
+                    <h6 class="mb-0 fw-bold"><a style="color:rgb(255, 255, 255);" href="{% url 'film' slug=film.slug %}">{{ film.name }}</a></h6>
+                </div>
+                <div class="col-auto text-end">
+                    {% if film.id in saved_movie_ids %}
+                        <a href="{% url 'kaydet' movie_id=film.id %}" 
+                           class="btn btn-lg btn-outline-info fw-semibold"
+                        >
+                            <i class="fa-solid fa-x"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'kaydet' movie_id=film.id %}" 
+                           class="btn btn-lg btn-success fw-semibold"
+                        >
+                            Kaydet
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+
