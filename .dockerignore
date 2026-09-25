@@ -4,3 +4,4 @@ __pycache__/
 *.pyo
 venv8/
 deneme_dosyaları/
+.git/

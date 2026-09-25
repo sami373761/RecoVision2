@@ -1,9 +1,13 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ----------------------------
 # API Anahtarları
 # ----------------------------
-TMDB_API_KEY = "c999e9521d42cbbf37212d74828cbd5d"
-GOOGLE_BOOKS_API_KEY = "AIzaSyBkf8kSV95UAEVued1SRd_3atQ1ZdKOzNk"
+TMDB_API_KEY = os.getenv("TMDB_API_KEY", "c999e9521d42cbbf37212d74828cbd5d")
+GOOGLE_BOOKS_API_KEY = os.getenv("GOOGLE_BOOKS_API_KEY", "AIzaSyBkf8kSV95UAEVued1SRd_3atQ1ZdKOzNk")
 # ----------------------------
 # Film Kategorileri (Movie)
 # ----------------------------

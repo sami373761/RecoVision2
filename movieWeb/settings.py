@@ -1,6 +1,8 @@
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 """
@@ -25,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%!qm$fy90bd9%4+ui5p=^kbyyw6dblmjz178eo!g8(1_ag%t_-'
+SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-%!qm$fy90bd9%4+ui5p=^kbyyw6dblmjz178eo!g8(1_ag%t_-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -98,11 +100,11 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'biaBKLXxJdhtFrVAPAiWyeCtUYkvsKNd',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT': '19900',
+        'NAME': os.getenv("DB_NAME", 'railway'),
+        'USER': os.getenv("DB_USER", 'postgres'),
+        'PASSWORD': os.getenv("DB_PASSWORD", 'biaBKLXxJdhtFrVAPAiWyeCtUYkvsKNd'),
+        'HOST': os.getenv("DB_HOST", 'monorail.proxy.rlwy.net'),
+        'PORT': os.getenv("DB_PORT", '19900'),
     }
 }
 
