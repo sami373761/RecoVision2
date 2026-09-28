@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block title %}Saved Series{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Saved Series</h2>
+    
+    {% for dizi in diziler %}
+        {% if dizi.id in saved_serie_ids %}
+            <div 
+                 class="kayıt row align-items-center p-2 mb-2 shadow-sm" 
+                 style="border-radius: 10px;"
+            >
+                <div class="col-auto">
+                    <img 
+                         src="{{ dizi.image.url }}" 
+                         alt="{{ dizi.title }}" 
+                         class="img-fluid rounded" 
+                         style="object-fit: cover; width: 80px; height: 80px;"
+                    >
+                </div>
+                <div class="col">
+                    <h6 class="mb-0 fw-bold text-dark"><a style="color:rgb(255, 255, 255);" href="{% url 'serie' slug=dizi.slug %}">{{ dizi.title }}</a></h6>
+                </div>
+                <div class="col-auto text-end">
+                    {% if dizi.id in saved_serie_ids %}
+                        <a href="{% url 'kaydet_serie' serie_id=dizi.id %}" 
+                           class="btn btn-lg btn-outline-info fw-semibold"
+                        >
+                            <i class="fa-solid fa-x"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'kaydet_serie' serie_id=dizi.id %}" 
+                           class="btn btn-lg btn-success fw-semibold"
+                        >
+                            Kaydet
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+

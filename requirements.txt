@@ -1,0 +1,16 @@
+Django>=4.2,<5.0
+psycopg2-binary
+dj-database-url
+django-storages
+boto3
+Pillow
+gunicorn
+requests
+nltk
+joblib
+scikit-learn==1.6.1
+numpy
+transformers
+sentence-transformers
+torch==2.2.2
+python-dotenv

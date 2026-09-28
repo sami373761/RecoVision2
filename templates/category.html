@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block title %} Ana Sayfa {%endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row g-4">
+        {% for category in categories %}
+            <div class="col-md-3 d-flex pt-4 pb-2">
+                <div class="card" >
+                    <div class="card bg-secondary" style="width: 18rem;">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" style="height: 150px;" class="card-img-top" alt="{{ category.name }}">
+                        {% else %}
+                            <img src="path/to/default/image.jpg" style="height: 150px;" class="card-img-top" alt="Default image">
+                        {% endif %}
+                        <div class="card-body">
+                          <p style="font-size:large; text-align: center;" class="card-text">{{ category.name }}</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  
+{% endblock %}

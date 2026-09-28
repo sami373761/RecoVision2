@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/hobby.css' %}">
+
+{% endblock %}
+{% block title %} Film Sayfası {%endblock %}
+
+{% block content %}
+    <div class="container-xxl py-3 px-5">
+        <div class="card h-100">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-md-4 d-flex flex-column">
+              <div style="height: 600px; overflow: hidden;">
+                <img src="{{ filmler.image.url }}" alt="Fotoğraf" class="w-100 h-100" style="object-fit: cover;">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body h-100">
+                <h4 class="card-title mb-3">{{ filmler.title }}</h4>
+                <div class="row">
+                  <div class="col-12 my-0">
+                    <p>{{ filmler.description }}</p>
+                  </div>
+                  <div  class="col-12 my-0">
+                        {% for kategori in filmler.category.all %}
+                        <a style="border-radius: 15px;" href="" class="btn btn-outline-secondary btn-sm">{{ kategori }}</a>
+                        {% endfor %}
+                  </div>
+                  <div class="col-12 my-0"> 
+                    <hr> 
+                    <p class="mb-0">Imdb Rate: {{ filmler.imdb_rating }}</p>
+                    <p class="mb-4">Release Date: {{ filmler.year }}</p>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: left;">
+                        <h6>Actors:</h6>
+                        {% for actor in filmler.actors.all %}
+                        <div style="text-align: center; max-width: 100px;">
+                            <a href="{% url 'actor' slug=actor.slug %}" style="text-decoration: none; color: inherit;">
+                                <img src="{{ actor.image.url }}" alt="{{ actor }}" 
+                                     style="width: 4.5rem; height: 4.5rem; border-radius: 50%; object-fit: cover; border: 2px solid #000000aa;">
+                                <p style="font-size: 0.75rem; margin-top: 5px; ">{{ actor }}</p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    
+                    </div>
+                </div>
+                <div class="row">
+                      <div class="col-12">
+                        <hr>
+                        <div style="display: flex; gap: 10px; align-items:end;">
+                          <div style="flex: 9; display: flex;  gap: 10px;">
+                              <h6>Director:</h6>
+                              <div style="text-align: center; max-width: 100px;">
+                                  <a href="{% url 'director' slug=filmler.director.slug %}" style="text-decoration: none; color: inherit;">
+                                      <img src="{{ filmler.director.image.url }}" alt="{{ director }}" 
+                                          style="width: 4.5rem; height: 4.5rem; border-radius: 50%; object-fit: cover; border: 2px solid  #000000aa;">
+                                      <p style="font-size: 0.75rem; margin-top: 5px;">{{ filmler.director }}</p>
+                                  </a>
+                              </div>
+                          </div>
+                          <div style="flex: 1; text-align: right;">
+                            <p class="card-text mb-0">
+                              {% if filmler.id in saved_movie_ids %}
+                              <a style="float: right;" href="{% url 'kaydet' movie_id=filmler.id %}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-check"></i></a>
+                              {% else %}
+                              <a style="float: right;" href="{% url 'kaydet' movie_id=filmler.id %}" class="btn btn-sm btn-outline-secondary">Save</a>
+                              {% endif %} 
+                            </p>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+{% endblock %}

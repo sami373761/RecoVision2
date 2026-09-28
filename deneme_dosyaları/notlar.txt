@@ -1,0 +1,133 @@
+0
+start : giriş cümlesi verir 
+
+1
+take_main_type : m-s-b alır
+
+2
+recommend_movie_one_category,2,3
+recommend_tv_one_category,2,3
+recommend_book_one_category,2,3
+
+take_movie_type : kategori alma
+take_serie_type : kategori alma
+take_book_type : kategori alma
+
+make_recommendation : üstteki func kullanır son nokta
+
+
+
+
+
+
+
+PLAN DIŞI CEVAP FONKSİYONLARI
+
+greeting -- step 0 a yollar 
+stop -- step 0 a yollar 
+previous -- değişmez
+curse -- step değişmez 
+invalid_response -- step değişmez (ayrı kullanılabilir)
+reset -- step 0 a yollar 
+unusual_response -- üsttekileri birleştiren fonksiyon
+is_category -- kategori bilmiyor mu test eden fonksiyon 
+
+
+
+İPUCU FONKSİYONLARI
+kategori ipucu m-s-b
+
+
+İLERİ SEVİYE FONKSİYONLAR
+pass fonksiyonları 
+double cevap fonksiyonları (horror movie gibi)
+
+TEMİZLEME FONKSİYONLARI
+clear -- yazıyı kullanılabilir hale getirir ** 
+
+
+
+
+recommend_RV : ana fonksiyon 
+
+
+
+
+nltk.download('stopwords'), nltk.download('wordnet') veya nltk.download('punkt')
+
+
+
+0 : start cümlesi(ican m-b-s)
+1 : kategori alma 
+2 : öneri verme 
+
+
+
+
+
+sentences = [
+    "Yes i want to go to the cinema.",
+    "No stop.",
+    "lets go",
+    "nah i want to do something else",
+    "hell no",
+    "i am not sure",
+    "sure lets go",
+    "i dont know",
+    "of course",
+    "yep",
+    "nope",
+    "i dont think so",
+    "i think so",
+    "no i dont think so",
+    "no"
+]
+  
+
+
+
+def chat_with_bot(req):
+    global chat_history_ids
+    if direct_suggestion(req) is not None:
+        return direct_suggestion(req)
+    elif is_suggestion_request(req):
+        state["step"] = 1
+        return start()
+    else:
+        tokenizer222.pad_token = tokenizer222.eos_token
+        new_user_input_ids = tokenizer222.encode(req + tokenizer222.eos_token, return_tensors='pt', max_length=512, truncation=True)
+
+        if chat_history_ids is not None:
+            bot_input_ids = torch.cat([chat_history_ids[:, -1000:], new_user_input_ids], dim=-1)
+        else:
+            bot_input_ids = new_user_input_ids
+
+        attention_mask = torch.ones_like(bot_input_ids)
+        chat_history_ids = model222.generate(
+            bot_input_ids,
+            attention_mask=attention_mask,
+            max_new_tokens=128,
+            pad_token_id=tokenizer222.eos_token_id,
+            do_sample=False,
+            temperature=0.6,
+            repetition_penalty=1.2,
+            no_repeat_ngram_size=2
+        )
+
+        response = tokenizer222.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True).strip()
+        
+        # Eğer yanıt çok kısa veya anlamsızsa tekrar üret
+        if len(response) < 3:
+            chat_history_ids = model222.generate(
+                bot_input_ids,
+                attention_mask=attention_mask,
+                max_new_tokens=128,
+                pad_token_id=tokenizer222.eos_token_id,
+                do_sample=False,
+                temperature=0.7,
+                repetition_penalty=1.2,
+                no_repeat_ngram_size=2
+            )
+            response = tokenizer222.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True).strip()
+
+        return response.capitalize()

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block title %} Home Page {%endblock %}
+{% block content %}
+<style>
+  body{
+    background: linear-gradient(#000000, #2a0a3f);
+  }
+</style>
+
+<div class="baslik-div">
+  <h1 id="baslik1" >RecoVision</h1>
+</div>
+<div class="baslik-div">
+  <h1 id="baslik2" >Your Next Obsession Interactive Hobby Finder</h1>
+</div>
+
+<div class="my-features-container">
+  
+  <div class="my-feature-item">
+    <div class="my-feature-number">100M+</div>
+    <div class="my-feature-title">Books</div>
+    <p class="my-feature-text">
+      Access to a library or collection containing over hundred million books.
+    </p>
+  </div>
+  
+  
+  <div class="my-feature-item">
+    <div class="my-feature-number">30+</div>
+    <div class="my-feature-title">Categories</div>
+    <p class="my-feature-text">
+      Customized recommendation system based on your category selections
+    </div>
+    
+    <div class="my-feature-item">
+      <div class="my-feature-number">1M+</div>
+      <div class="my-feature-title">Movies and Series</div>
+      <p  class="my-feature-text">
+        Access to over one million movies and TV series plus unlimited access to new content
+      </p>
+    </div>
+</div>
+
+
+
+
+
+<!-- Carousel Başlangıcı -->
+<div class="myCarousel-container">
+  <div class="myCarousel-carousel">
+    <div class="myCarousel-slide">
+      <a href="#">
+        <img src="https://picsum.photos/id/1011/800/500" alt="Slide 1">
+      </a>
+    </div>
+    <div class="myCarousel-slide">
+      <a href="#">
+        <img src="https://picsum.photos/id/1015/800/500" alt="Slide 2">
+      </a>
+    </div>
+    <div class="myCarousel-slide">
+      <a href="#">
+        <img src="https://picsum.photos/id/1016/800/500" alt="Slide 3">
+      </a>
+    </div>
+    <div class="myCarousel-slide">
+      <a href="#">
+        <img src="https://picsum.photos/id/1019/800/500" alt="Slide 4">
+      </a>
+    </div>
+    <div class="myCarousel-slide">
+      <a href="#">
+        <img src="https://picsum.photos/id/1022/800/500" alt="Slide 5">
+      </a>
+    </div>
+  </div>
+
+  <button class="myCarousel-nav myCarousel-prev">&#10094;</button>
+  <button class="myCarousel-nav myCarousel-next">&#10095;</button>
+
+  <div class="myCarousel-indicators"></div>
+</div>
+<!-- Carousel Bitişi -->
+
+
+
+
+<div  class="vanilla mx-5">
+  <div class="card-custom11">
+    <div class="grid-container">
+      <div class="grid-item">
+        <h1><svg width="30" height="30"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+          <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd" />
+        </svg>
+        </h1>
+        <h1>AI Chatbot</h1>
+        <p>With the AI-powered chat engine, enjoy both casual conversations and the opportunity to benefit from a sophisticated recommendation system.</p>
+      </div>
+      <div class="grid-item">
+        <h1><i class="fa-solid fa-circle-user"></i></h1>
+        <h1>Personalized Suggestions</h1>
+        <p>Receive tailored recommendations designed specifically for you, powered by advanced algorithms that analyze your preferences and adapt to your evolving interests.</p>
+      </div>
+      <div class="grid-item">
+        <h1><i class="fa-solid fa-database"></i></h1>
+        <h1>Extensive Hobby Database</h1>
+        <p>Browse an extensive hobby database that not only offers detailed insights into various interests but also keeps you updated with new and exciting content regularly.</p>
+      </div>
+      <div class="grid-item">
+      <h1><i class="fa-solid fa-clock"></i></h1>
+      <h1>Save Your Time</h1>
+      <p>Discover a wide range of hobbies effortlessly, giving you the opportunity to make the most of your time while enriching your daily experiences with meaningful activities.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-custom12">
+      <div  class="card-custom2">
+        <div class="card-icerik">
+          <p style="font-size: 2rem;"><img id="logo1" src="{% static 'images/RV_logo.svg' %}" alt="Logo"></p>
+          <h1 style="font-size: 2rem; margin: 2rem;" >Discover Your Passions Effortlessly!</h1>
+          <p style="margin-top: 3rem;"><a class="btn btn-outline-light btn-sm" href="{% url 'reco' %}">Start Using</a></p>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="card-group  px-2 my-custom-cards" style="margin-top: 3rem;">
+    <div class="hobby-cards card mx-2 my-4">
+      <div class="hobby-card1 card-body">
+        <a href="{% url 'books' %}">
+        <h1 style="font-size: 5rem; text-align:center;"><i class="fa-solid fa-book"></i></h1>
+        <h2 style="text-align:center;">Books</h2>
+        </a>
+      </div>
+    </div>
+    <div class="hobby-cards card mx-2 my-4">
+      <div class="hobby-card2 card-body">
+        <a href="{% url 'series' %}">
+        <h1 style="font-size: 5rem; text-align:center;"><i class="fa-solid fa-tv"></i></h1>
+        <h2 style="text-align:center;">Series</h2>
+        </a>
+      </div>
+    </div>
+    <div class="hobby-cards card mx-2 my-4">
+      <div class="hobby-card3 card-body">
+        <a href="{% url 'films' %}">
+        <h1 style="font-size: 5rem; text-align:center;"><i class="fa-solid fa-film"></i></h1>
+        <h2 style="text-align:center;">Movies</h2>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+
+{% block js_files %} 
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/vanilla-tilt.min.js' %}"></script>
+<script type="text/javascript">
+  VanillaTilt.init(document.querySelector(".card-custom2"), {
+    max: 15,
+    speed: 300
+  });
+  
+  //It also supports NodeList
+  VanillaTilt.init(document.querySelectorAll(".card-custom2"));
+</script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/profil.css' %}">
+{% endblock %}
+{% block title %} Profile Page {% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar">
+        <div class="image-alanı">
+          <div id="profile" class="profile-photo">
+            {% if profile.image %}
+              <img src="{{ profile.image.url }}" alt="user_image" style="border: 1px solid black;">
+            {% else %}
+              <img src="{% static 'profile_images/default.jpg' %}" alt="user_image" style="border: 1px solid black;">
+            {% endif %}
+          </div>
+        </div>
+        <ul class="nav nav-pills flex-column" id="tabMenu" role="tablist">
+          <li class="nav-item">
+            <a class="nav2 nav-link active" id="tab1" data-toggle="pill" href="#content1" role="tab" aria-controls="content1" aria-selected="true">Account Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav2 nav-link" id="tab2" data-toggle="pill" href="#content2" role="tab" aria-controls="content2" aria-selected="false">Preferences</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav2 nav-link" id="tab3" data-toggle="pill" href="#content3" role="tab" aria-controls="content3" aria-selected="false">Reset Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav2 nav-link" id="tab4" data-toggle="pill" href="#content4" role="tab" aria-controls="content4" aria-selected="false">Change Password</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav2 nav-link" id="tab5" data-toggle="pill" href="#content5" role="tab" aria-controls="content5" aria-selected="false">Delete Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
+          <div style="font-size: 1rem;" class="profile-info">
+            <h4>Account Information</h4>
+            <hr style="border: 0.9px solid rgb(255, 255, 255); opacity: 0.7;">
+            <span class="label">Username: <span style="opacity: 0.9;">{{ user.username }}</span></span>
+            <span class="label">E-mail: <span style="opacity: 0.9;">{{ user.email }}</span></span>
+            <hr style="border: 0.9px solid rgb(255, 255, 255); opacity: 0.7;">
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="custom-div101">
+                <button id="updtPP" class="btn btn-outline-light" type="submit" name="update_image">Update Profile Picture</button></div>
+            </form>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="content2" role="tabpanel" aria-labelledby="tab2">
+          <div class="container mt-4">
+            <ul class="nav nav-tabs" id="myUniqueTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav2 nav-link active" id="tabContent6" data-toggle="tab" href="#content6" role="tab" aria-controls="content6" aria-selected="true">Movies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav2 nav-link" id="tabContent7" data-toggle="tab" href="#content7" role="tab" aria-controls="content7" aria-selected="false">Series</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav2 nav-link" id="tabContent8" data-toggle="tab" href="#content8" role="tab" aria-controls="content8" aria-selected="false">Books</a>
+              </li>
+            </ul>
+            <div class="tab-content mt-3">
+              <div class="tab-pane fade show active" id="content6" role="tabpanel" aria-labelledby="tabContent6">
+                <div class="series-container">
+                  <div class="series-info">
+                    <h4>Movies Categories</h4>
+                    <p id="category-message">Your most preferred movie categories</p>
+                  </div>
+                  <div class="chart">
+                    <canvas id="movieCategoryChart" width="220" height="220"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="content7" role="tabpanel" aria-labelledby="tabContent7">
+                <div class="series-container">
+                  <div class="series-info">
+                    <h4>Series Categories</h4>
+                    <p id="category-message2">Your most preferred TV series categories</p>
+                  </div>
+                  <div class="chart">
+                    <canvas id="seriesCategoryChart" width="220" height="220"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="content8" role="tabpanel" aria-labelledby="tabContent8">
+                <div class="series-container">
+                  <div class="series-info">
+                    <h4>Books Categories</h4>
+                    <p id="category-message3">Your most preferred book categories</p>
+                  </div>
+                  <div class="chart">
+                    <canvas id="booksCategoryChart" width="220" height="220"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="content3" role="tabpanel" aria-labelledby="tab3">
+          <h4>Reset Account</h4>
+          <hr style="border: 0.9px solid rgb(255, 255, 255); opacity: 0.7;">
+          <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.9rem;">To reset your account, click the button below.</p>
+          <div style="position: absolute; bottom: 2.3rem; right: 2rem; width: 100%; text-align: right;">
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#resetModal">Reset</button>
+          </div>
+      </div>
+      
+      <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 style="color: rgba(0, 0, 0, 0.723);" class="modal-title" id="resetModalLabel">Reset Saved Content for {{ user.username }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p style="color: rgba(0, 0, 0, 0.7); font-size: 1rem;">Are you sure you want to reset all saved movies, books, and series? This action cannot be undone.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <form method="POST" action="{% url 'reset_saves' user.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Confirm Reset</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+        <div class="tab-pane fade" id="content4" role="tabpanel" aria-labelledby="tab4">
+          <div>
+            <h4>Change Password</h4>
+            <hr style="border: 0.9px solid rgb(255, 255, 255); opacity: 0.7;">
+            <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.9rem;">To reset your password, click the button below to go to the reset page.</p>
+            <div style="position: absolute; bottom: 2.3rem; right: 2rem; width: 100%; text-align: right;">
+              <a href="{% url 'change_password' %}" class="btn btn-outline-light">Update Password</a>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="content5" role="tabpanel" aria-labelledby="tab5">
+          <h4>Delete Your Account</h4>
+          <hr style="border: 0.9px solid rgb(255, 255, 255); opacity: 0.7;">
+          <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.9rem;">Removing your account will permanently erase all saved data. To proceed, please click the button below.</p>
+          <div style="position: absolute; bottom: 2.3rem; right: 2rem; width: 100%; text-align: right;">
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+              Delete 
+            </button>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 style="color: rgba(0, 0, 0, 0.723);"  class="modal-title" id="exampleModalLabel">Delete {{user.username}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p style="color: rgba(0, 0, 0, 0.672); font-size: 1.1rem;">Do you confirm deleting your account and permanently erasing all data?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit" name="delete_account">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        crossorigin="anonymous">
+</script>
+<script>
+  const movieCategoryCounts = JSON.parse('{{ category_counts_json|safe }}') || [];
+  const seriesCategoryCounts = JSON.parse('{{ category_counts2_json|safe }}') || [];
+  const booksCategoryCounts = JSON.parse('{{ category_counts3_json|safe }}') || [];
+  const movieLabels = movieCategoryCounts.map(item => item.category__name);
+  const movieData = movieCategoryCounts.map(item => item.count);
+  const seriesLabels = seriesCategoryCounts.map(item => item.category__name);
+  const seriesData = seriesCategoryCounts.map(item => item.count);
+  const booksLabels = booksCategoryCounts.map(item => item.bookCategories__name);
+  const booksData = booksCategoryCounts.map(item => item.count);
+  const movieCtx = document.getElementById('movieCategoryChart').getContext('2d');
+  if (movieCategoryCounts.every(count => count === 0)) {
+    document.getElementById('category-message').textContent = 'You can see your most preferred movie catgories here';
+  }
+  if (seriesCategoryCounts.every(count => count === 0)) {
+    document.getElementById('category-message2').textContent = 'You can see your most preferred tv show catgories here';
+  }
+  new Chart(movieCtx, {
+    type: 'doughnut',
+    data: {
+      labels: movieLabels,
+      datasets: [{
+        label: 'Movie Categories',
+        data: movieData,
+        backgroundColor: ['#43AFF3', '#BE82F0', '#82F0B9'],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      //EKLENDİ: Grafik en-boy oranını korumayı kapatıyoruz; boyutu konteyner'a tam uysun
+      maintainAspectRatio: false, //EKLENDİ
+      //EKLENDİ: Her resize olayı tetiklenince font boyutunu otomatik ayarlayan fonksiyon
+      onResize: function(chart, size) { //EKLENDİ
+          let fontSize = Math.max(Math.floor(size.width / 25), 8); //EKLENDİ
+          chart.options.plugins.legend.labels.font.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.bodyFont.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.titleFont.size = fontSize + 2; //EKLENDİ
+          chart.update('none'); //EKLENDİ
+      }, //EKLENDİ
+      plugins: {
+        legend: { 
+          position: 'top',
+          //EKLENDİ: Varsayılan font boyutunu 12 yapıyoruz (ilk yüklemede)
+          labels: { //EKLENDİ
+            font: { //EKLENDİ
+              size: 12 //EKLENDİ
+            } //EKLENDİ
+          } //EKLENDİ
+        },
+        tooltip: { 
+          enabled: true 
+        }
+      }
+    }
+  });
+
+  const seriesCtx = document.getElementById('seriesCategoryChart').getContext('2d');
+  new Chart(seriesCtx, {
+    type: 'doughnut',
+    data: {
+      labels: seriesLabels,
+      datasets: [{
+        label: 'Series Categories',
+        data: seriesData,
+        backgroundColor: ['#43AFF3', '#BE82F0', '#82F0B9'],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      //EKLENDİ
+      maintainAspectRatio: false, //EKLENDİ
+      //EKLENDİ
+      onResize: function(chart, size) { //EKLENDİ
+          let fontSize = Math.max(Math.floor(size.width / 25), 8); //EKLENDİ
+          chart.options.plugins.legend.labels.font.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.bodyFont.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.titleFont.size = fontSize + 2; //EKLENDİ
+          chart.update('none'); //EKLENDİ
+      }, //EKLENDİ
+      plugins: {
+        legend: {
+          position: 'top',
+          //EKLENDİ
+          labels: { //EKLENDİ
+            font: { //EKLENDİ
+              size: 12 //EKLENDİ
+            } //EKLENDİ
+          } //EKLENDİ
+        },
+        tooltip: {
+          enabled: true
+        }
+      }
+    }
+  });
+
+  const booksCtx = document.getElementById('booksCategoryChart').getContext('2d');
+  new Chart(booksCtx, {
+    type: 'doughnut',
+    data: {
+      labels: booksLabels,
+      datasets: [{
+        label: 'Books Categories',
+        data: booksData,
+        backgroundColor: ['#43AFF3', '#BE82F0', '#82F0B9'],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      //EKLENDİ
+      maintainAspectRatio: false, //EKLENDİ
+      //EKLENDİ
+      onResize: function(chart, size) { //EKLENDİ
+          let fontSize = Math.max(Math.floor(size.width / 25), 8); //EKLENDİ
+          chart.options.plugins.legend.labels.font.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.bodyFont.size = fontSize; //EKLENDİ
+          chart.options.plugins.tooltip.titleFont.size = fontSize + 2; //EKLENDİ
+          chart.update('none'); //EKLENDİ
+      }, //EKLENDİ
+      plugins: {
+        legend: {
+          position: 'top',
+          //EKLENDİ
+          labels: { //EKLENDİ
+            font: { //EKLENDİ
+              size: 12 //EKLENDİ
+            } //EKLENDİ
+          } //EKLENDİ
+        },
+        tooltip: {
+          enabled: true
+        }
+      }
+    }
+  });
+</script>
+
+{% block js_files %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+{% endblock %}
