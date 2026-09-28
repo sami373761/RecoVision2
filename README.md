@@ -300,3 +300,4 @@ on `reco` can be removed because the client in `reco.html` already sends a valid
 `movie_uygulama/urls.py` reuses the name `director`, which is already bound to the
 director detail route; reverse resolution currently disambiguates by argument count, but
 the collision is fragile.
+
