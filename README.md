@@ -5,7 +5,7 @@ interactive conversational recommendation engine. Users browse and bookmark Movi
 Series, Books and separately hold a free-text conversation with a
 multi-stage recommender at `/reco` that resolves intent and genre from natural language
 before querying TMDB and Google Books for a live suggestion.
-
+ 
 The two halves are deliberately independent. The catalogue pages read from PostgreSQL;
 the conversational engine never touches the local database and always returns a live
 result from an external API.
